@@ -6,6 +6,7 @@
 
   $(document).ready(function() {
       var selectedImageUrl = window.IMGEN[0].url;
+      var selectedImageName = window.IMGEN[0].url
       function createImages() {
         var container = $('.images__container');
         var $imgs = window.IMGEN.map(function(image) {
@@ -44,10 +45,6 @@
       var document = window.document;
       var session = window.sessionStorage;
       var img;
-
-      get_blob = function() {
-        return window.Blob;
-      }
 
       //////////////////
       // UPLOAD IMAGE //
@@ -141,14 +138,14 @@
         console.log(canvas)
 
         var canvas_filename = {
-          value: "macica"
+          value: $('img.active').attr('alt')
         }
 
         canvas.toBlob(function(blob) {
           console.log("-- canvas.toBlob --")
           console.log(blob)
 
-          if (window.mobileAndTabletcheck) {
+          if (window.mobileAndTabletcheck()) {
             // if (true) {
             var urlCreator = window.URL || window.webkitURL;
             var imageUrl = urlCreator.createObjectURL(blob);
